@@ -55,6 +55,13 @@
 (setq column-number-mode t) ;; show column number
 (setq-default indent-tabs-mode nil) ;; disable tabs
 
+; Highlight tabs and trailing whitespace everywhere
+(setq whitespace-style '(face trailing tabs))
+(custom-set-faces
+ '(whitespace-tab ((t (:background "red")))))
+(global-whitespace-mode)
+
+
 ;; Fonts
 ;; 
 
@@ -68,6 +75,30 @@
 ;;(set-default-font "Dejavu Sans Mono 9")
 ;; init.el ends here
 
+
+;; C/C++ Mode
+;;
+
+; start flymake-google-cpplint-load
+; let's define a function for flymake initialization
+(defun my:flymake-google-init () 
+  (require 'flymake-google-cpplint)
+  ;;(custom-set-variables
+  ;; '(flymake-google-cpplint-command "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/bin/cpplint"))
+  (flymake-google-cpplint-load)
+)
+(add-hook 'c-mode-hook 'my:flymake-google-init)
+(add-hook 'c++-mode-hook 'my:flymake-google-init)
+
+; start yasnippet with emacs
+(require 'yasnippet)
+(yas-global-mode 1)
+
+; start google-c-style with emacs
+(require 'google-c-style)
+;;(add-hook 'c-mode-common-hook 'google-set-c-style)
+(add-hook 'c-mode-common-hook 'google-make-newline-indent)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -80,3 +111,16 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+(custom-set-variables
+ '(tab-width 4))
+;;(setq-default c-basic-offset 4)
+;;(setq-default tab-width 4) ; or any other preferred value
+;;(defvaralias 'c-basic-offset 'tab-width)
+
+(setq tab-width 4) ; or any other preferred value
+(defvaralias 'c-basic-offset 'tab-width)
+(defvaralias 'cperl-indent-level 'tab-width)
+
+(setq-default tab-width 4)
+
