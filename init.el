@@ -17,7 +17,9 @@
     elpy
     flycheck
     py-autopep8
-    material-theme))
+    material-theme
+    zenburn-theme
+    color-theme-sanityinc-tomorrow))
 
 (mapc #'(lambda (package)
     (unless (package-installed-p package)
@@ -40,10 +42,18 @@
 ;; BASIC CUSTOMIZATION
 ;; --------------------------------------
 
+(require 'color-theme-sanityinc-tomorrow)
+
+(menu-bar-mode -1) ;; hide menu bar
 (setq inhibit-startup-message t) ;; hide the startup message
 (load-theme 'material t) ;; load material theme
+;;(load-theme 'zenburn t) ;; load material theme
+;;(load-theme 'color-theme-sanityinc-tomorrow-night t) ;; load material theme
 (global-linum-mode t) ;; enable line numbers globally
-
+(add-to-list 'default-frame-alist '(fullscreen . fullheight)) ;; maximize height
+(add-to-list 'default-frame-alist (cons 'width 120)) ;; window width to 120 chars
+(setq column-number-mode t) ;; show column number
+(setq-default indent-tabs-mode nil) ;; disable tabs
 
 ;; Fonts
 ;; 
