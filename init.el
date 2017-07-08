@@ -49,12 +49,13 @@
 ;; 
 
 ;;(set-default-font "Inconsolata 11")
-;;(set-default-font "Roboto-Mono Regular 11") NOT WORKING
+;;(set-default-font "FiraCode 11")
+;;(set-default-font "RobotoMono 11") 
 ;;(set-default-font "Roboto Medium 11")
 ;;(set-default-font "Roboto Bold 11")
 ;;(set-default-font "Roboto Bold Condensed 11")
-(set-default-font "Monaco 15")
-(set-default-font "Dejavu Sans Mono 9")
+(set-default-font "Monaco 11")
+;;(set-default-font "Dejavu Sans Mono 9")
 ;; init.el ends here
 
 (custom-set-variables
