@@ -19,7 +19,9 @@
     py-autopep8
     material-theme
     zenburn-theme
-    color-theme-sanityinc-tomorrow))
+    color-theme-sanityinc-tomorrow
+    google-c-style
+    jedi))
 
 (mapc #'(lambda (package)
     (unless (package-installed-p package)
@@ -45,6 +47,7 @@
 (require 'color-theme-sanityinc-tomorrow)
 
 (menu-bar-mode -1) ;; hide menu bar
+(tool-bar-mode -1) ;; hide tool bar
 (setq inhibit-startup-message t) ;; hide the startup message
 (load-theme 'material t) ;; load material theme
 ;;(load-theme 'zenburn t) ;; load material theme
@@ -54,6 +57,7 @@
 (add-to-list 'default-frame-alist (cons 'width 120)) ;; window width to 120 chars
 (setq column-number-mode t) ;; show column number
 (setq-default indent-tabs-mode nil) ;; disable tabs
+(setq-default python-indent-guess-indent-offset nil) ;; disable python indent guess
 
 ; Highlight tabs and trailing whitespace everywhere
 (setq whitespace-style '(face trailing tabs))
@@ -112,15 +116,16 @@
  ;; If there is more than one, they won't work right.
  )
 
-(custom-set-variables
- '(tab-width 4))
+;;(custom-set-variables
+;; '(tab-width 4))
 ;;(setq-default c-basic-offset 4)
 ;;(setq-default tab-width 4) ; or any other preferred value
 ;;(defvaralias 'c-basic-offset 'tab-width)
 
-(setq tab-width 4) ; or any other preferred value
-(defvaralias 'c-basic-offset 'tab-width)
-(defvaralias 'cperl-indent-level 'tab-width)
+;;(setq tab-width 4) ; or any other preferred value
+;;(defvaralias 'c-basic-offset 'tab-width)
+;;(defvaralias 'cperl-indent-level 'tab-width)
+;;(defvaralias 'cperl-indent-level 'tab-width)
 
 (setq-default tab-width 4)
 
