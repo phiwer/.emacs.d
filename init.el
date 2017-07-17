@@ -1,7 +1,18 @@
-;; init.el --- Emacs configuration
+ ;; init.el --- Emacs configuration
 
 ;; INSTALL PACKAGES
 ;; --------------------------------------
+
+;; Start server only if it is not running.
+(load "server")
+(unless (server-running-p) (server-start))
+
+;; Reload buffer without confirmation
+;; Source: http://www.emacswiki.org/emacs-en/download/misc-cmds.el
+(defun revert-buffer-no-confirm ()
+    "Revert buffer without confirmation."
+    (interactive)
+    (revert-buffer :ignore-auto :noconfirm))
 
 (require 'package)
 
