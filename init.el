@@ -19,6 +19,8 @@
 (add-to-list 'package-archives
        '("melpa" . "http://melpa.org/packages/") t)
 
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+
 (package-initialize)
 (when (not package-archive-contents)
   (package-refresh-contents))
@@ -73,6 +75,10 @@
 ; Highlight tabs and trailing whitespace everywhere
 (setq whitespace-style '(face trailing tabs))
 (custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(whitespace-tab ((t (:background "red")))))
 (global-whitespace-mode)
 
@@ -119,13 +125,11 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   (quote
+    ("59064d8bde39b9f4c663e319eba863c9518194d6ff77dbc582b2150d07b5a908" default)))
  '(tool-bar-mode nil))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+
 
 ;;(custom-set-variables
 ;; '(tab-width 4))
