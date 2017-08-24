@@ -40,7 +40,8 @@
     flymake-cursor
     auto-complete
     auto-complete-c-headers
-    yasnippet))
+    yasnippet
+    cedet))
 
 (mapc #'(lambda (package)
     (unless (package-installed-p package)
@@ -110,6 +111,8 @@
 ;; init.el ends here
 
 
+(semantic-mode 1)
+
 ;; C/C++ Mode
 ;;
 
@@ -141,6 +144,18 @@
 (add-hook 'c-mode-hook 'my:ac-c-header-init)
 (add-hook 'c++-mode-hook 'my:ac-c-header-init)
 
+(defun my:add-semantic-to-autocomplete ()
+  (add-to-list 'ac-sources 'ac-source-semantic))
+
+(add-hook 'c-mode-common-hook 'my:add-semantic-to-autocomplete)
+(add-hook 'c++-mode-common-hook 'my:add-semantic-to-autocomplete)
+
+(global-ede-mode 1)
+
+(ede-cpp-root-project "my project" :file "~/dev/test.cpp"
+                      :include-path '("~dev/"))
+
+(global-semantic-idle-scheduler-mode 1)
 
 ; start yasnippet with emacs
 (require 'yasnippet)
@@ -148,8 +163,19 @@
 
 ; start google-c-style with emacs
 (require 'google-c-style)
-(add-hook 'c-mode-common-hook 'google-set-c-style)
+(defun my-c-mode-hook ()
+  (google-set-c-style)
+  (setq c-basic-offset 4 
+        ;;indent-tabs-mode t 
+        default-tab-width 4))
+
+(add-hook 'c-mode-hook 'my-c-mode-hook)
+(add-hook 'c++-mode-hook 'my-c-mode-hook)
+
+;;(add-hook 'c-mode-common-hook 'google-set-c-style)
 (add-hook 'c-mode-common-hook 'google-make-newline-indent)
+
+
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -174,4 +200,6 @@
 ;;(defvaralias 'cperl-indent-level 'tab-width)
 
 (setq-default tab-width 4)
+
+(setq-default c-basic-offset 4)
 
