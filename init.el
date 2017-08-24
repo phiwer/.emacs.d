@@ -34,12 +34,25 @@
     zenburn-theme
     color-theme-sanityinc-tomorrow
     google-c-style
-    jedi))
+    jedi
+    iedit
+    flymake-google-cpplint
+    flymake-cursor
+    auto-complete
+    auto-complete-c-headers
+    yasnippet))
 
 (mapc #'(lambda (package)
     (unless (package-installed-p package)
       (package-install package)))
       myPackages)
+
+(require 'auto-complete)
+
+(require 'auto-complete-config)
+(ac-config-default)
+
+(require 'iedit)
 
 (elpy-enable)
 
@@ -104,12 +117,30 @@
 ; let's define a function for flymake initialization
 (defun my:flymake-google-init () 
   (require 'flymake-google-cpplint)
-  ;;(custom-set-variables
-  ;; '(flymake-google-cpplint-command "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/bin/cpplint"))
+  (custom-set-variables
+   '(flymake-google-cpplint-command "/usr/local/bin/cpplint"))
   (flymake-google-cpplint-load)
 )
 (add-hook 'c-mode-hook 'my:flymake-google-init)
 (add-hook 'c++-mode-hook 'my:flymake-google-init)
+
+(defun my:ac-c-header-init ()
+  (require 'auto-complete-c-headers)
+  (add-to-list 'ac-sources 'ac-source-c-headers)
+  (setq achead:include-directories
+        (append '("/usr/include/c++/5"
+                  "/usr/include/x86_64-linux-gnu/c++/5"
+                  "/usr/include/c++/5/backward"
+                  "/usr/lib/gcc/x86_64-linux-gnu/5/include"
+                  "/usr/local/include"
+                  "/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"
+                  "/usr/include/x86_64-linux-gnu"
+                  "/usr/include")
+                achead:include-directories)))
+
+(add-hook 'c-mode-hook 'my:ac-c-header-init)
+(add-hook 'c++-mode-hook 'my:ac-c-header-init)
+
 
 ; start yasnippet with emacs
 (require 'yasnippet)
@@ -117,7 +148,7 @@
 
 ; start google-c-style with emacs
 (require 'google-c-style)
-;;(add-hook 'c-mode-common-hook 'google-set-c-style)
+(add-hook 'c-mode-common-hook 'google-set-c-style)
 (add-hook 'c-mode-common-hook 'google-make-newline-indent)
 
 (custom-set-variables
